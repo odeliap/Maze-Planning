@@ -34,3 +34,43 @@ goal.E_wall = position_walls[goal.position]['E']
 goal.W_wall = position_walls[goal.position]['W']
 goal.N_wall = position_walls[goal.position]['N']
 goal.S_wall = position_walls[goal.position]['S']
+
+# -------------------------------------------
+# Operators
+
+def go_north(state, a):
+    if state.N_wall[a] == 1:
+        prev_position = state.position[a]
+        new_row = prev_position[a][0] - 1
+        col = prev_position[1]
+        state.postion[a] = (new_row, col)
+        return state
+    else: return False
+
+def go_south(state, a):
+    if state.S_wall[a] == 1:
+        prev_position = state.position[a]
+        new_row = prev_position[a][0] + 1
+        col = prev_position[1]
+        state.postion[a] = (new_row, col)
+        return state
+    else: return False
+
+def go_east(state, a):
+    if state.E_wall[a] == 1:
+        prev_position = state.position[a]
+        new_col = prev_position[a][1] + 1
+        row = prev_position[0]
+        state.postion[a] = (row, new_col)
+        return state
+    else: return False
+
+def go_west(state, a):
+    if state.W_wall[a] == 1:
+        prev_position = state.position[a]
+        new_col = prev_position[a][1] - 1
+        row = prev_position[0]
+        state.postion[a] = (row, new_col)
+        return state
+    else: return False
+
