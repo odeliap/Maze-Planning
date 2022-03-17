@@ -85,29 +85,29 @@ pyhop.print_operators()
 # Methods
 
 def go_north(state, a):
-    if state.N_wall[a] == 1:
+    if state.N_wall == 1:
         return [('move_north', a)]
     else: return False
 
 def go_south(state, a):
-    if state.S_wall[a] == 1:
+    if state.S_wall == 1:
         return [('move_south', a)]
     else: return False
 
 def go_east(state, a):
-    if state.E_wall[a] == 1:
+    if state.E_wall == 1:
         return [('move_east', a)]
     else: return False
 
 def go_west(state, a):
-    if state.W_wall[a] == 1:
+    if state.W_wall == 1:
         return [('move_west', a)]
     else: return False
 
 pyhop.declare_methods('go', go_north, go_south, go_east, go_west)
 
 def solve_maze(state, a):
-    if state.position[a] == state.goal[a]:
+    if (state.position[0] == state.goal[0]) and (state.position[1] == state.goal[1]):
         return []
     else:
         return [('go', a), ('solve', a)]
