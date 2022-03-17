@@ -15,6 +15,7 @@ m.run()
 # map of position -> E, W, N, S
 position_walls = m.maze_map
 
+
 # -------------------------------------------
 # Set start state
 start = pyhop.State('start')
@@ -24,6 +25,7 @@ start.E_wall = position_walls[start.position]['E']
 start.W_wall = position_walls[start.position]['W']
 start.N_wall = position_walls[start.position]['N']
 start.S_wall = position_walls[start.position]['S']
+
 
 # -------------------------------------------
 # Set goal state
@@ -35,10 +37,11 @@ goal.W_wall = position_walls[goal.position]['W']
 goal.N_wall = position_walls[goal.position]['N']
 goal.S_wall = position_walls[goal.position]['S']
 
+
 # -------------------------------------------
 # Operators
 
-def go_north(state, a):
+def move_north(state, a):
     if state.N_wall[a] == 1:
         prev_position = state.position[a]
         new_row = prev_position[a][0] - 1
@@ -47,7 +50,7 @@ def go_north(state, a):
         return state
     else: return False
 
-def go_south(state, a):
+def move_south(state, a):
     if state.S_wall[a] == 1:
         prev_position = state.position[a]
         new_row = prev_position[a][0] + 1
@@ -56,7 +59,7 @@ def go_south(state, a):
         return state
     else: return False
 
-def go_east(state, a):
+def move_east(state, a):
     if state.E_wall[a] == 1:
         prev_position = state.position[a]
         new_col = prev_position[a][1] + 1
@@ -65,7 +68,7 @@ def go_east(state, a):
         return state
     else: return False
 
-def go_west(state, a):
+def move_west(state, a):
     if state.W_wall[a] == 1:
         prev_position = state.position[a]
         new_col = prev_position[a][1] - 1
@@ -74,3 +77,29 @@ def go_west(state, a):
         return state
     else: return False
 
+pyhop.declare_operators(move_north, move_south, move_east, move_west)
+print('')
+pyhop.print_operators()
+
+# -------------------------------------------
+# Methods
+
+def go_north(state, a):
+    if state.N_wall[a] == 1:
+        return [('move_north', a)]
+    else: return False
+
+def go_south(state, a):
+    if state.S_wall[a] == 1:
+        return [('move_south', a)]
+    else: return False
+
+def go_east(state, a):
+    if state.E_wall[a] == 1:
+        return [('move_east', a)]
+    else: return False
+
+def go_west(state, a):
+    if state.W_wall[a] == 1:
+        return [('move_west', a)]
+    else: return False
