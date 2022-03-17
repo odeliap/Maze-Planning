@@ -1,7 +1,7 @@
 # -------------------------------------------
 # Libraries
 
-from pyamaze import maze, COLOR, agent
+from pyamaze import maze, COLOR
 import pyhop
 
 r, c = 3, 3
@@ -25,7 +25,8 @@ start.E_wall = position_walls[start.position]['E']
 start.W_wall = position_walls[start.position]['W']
 start.N_wall = position_walls[start.position]['N']
 start.S_wall = position_walls[start.position]['S']
-
+start.goal = (1, 1)
+start.exit = False
 
 # -------------------------------------------
 # Set goal state
@@ -36,7 +37,6 @@ goal.E_wall = position_walls[goal.position]['E']
 goal.W_wall = position_walls[goal.position]['W']
 goal.N_wall = position_walls[goal.position]['N']
 goal.S_wall = position_walls[goal.position]['S']
-
 
 # -------------------------------------------
 # Operators
@@ -103,3 +103,18 @@ def go_west(state, a):
     if state.W_wall[a] == 1:
         return [('move_west', a)]
     else: return False
+
+pyhop.declare_methods('go', go_north, go_south, go_east, go_west)
+
+def solve_maze(state, a):
+    if state.position[a] == state.goal[a]:
+        return []
+    else:
+        return [('go', a), ('solve', a)]
+
+pyhop.declare_methods('solve', solve_maze)
+
+# -------------------------------------------
+# Test
+
+pyhop.pyhop(start, [('solve','start')],verbose=3)
