@@ -9,7 +9,7 @@ r, c = 3, 3
 # -------------------------------------------
 # Initialize maze
 m=maze(r, c)
-m.CreateMaze(theme=COLOR.light)
+m.CreateMaze(theme=COLOR.light, saveMaze=True)
 print(m.maze_map)
 m.run()
 # map of position -> E, W, N, S
