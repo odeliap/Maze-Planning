@@ -1,16 +1,8 @@
 from pyamaze import maze, COLOR, agent
-import pyhop
-
-r, c = 10, 10
+from lab3_planner import planner
 
 # -------------------------------------------
-# Initialize maze
-m=maze(r, c)
-m.CreateMaze(theme=COLOR.light, saveMaze=True)
-a = agent(m, footprints=True)
-m.tracePath({a:m.path})
-m.run()
-
+# Functions
 def plan_to_path(plan_list):
     path = ''
     for plan in plan_list:
@@ -19,3 +11,16 @@ def plan_to_path(plan_list):
         path += direction
     return path
 
+# -------------------------------------------
+# Initialize maze
+r, c = 10, 10
+m=maze(r, c)
+m.CreateMaze(theme=COLOR.light, saveMaze=True)
+a = agent(m, footprints=True)
+position_walls = m.maze_map
+
+plan = planner(position_walls, r, c)
+path = plan_to_path(plan)
+
+m.tracePath({a:path})
+m.run()
