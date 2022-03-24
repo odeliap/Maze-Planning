@@ -14,19 +14,16 @@ maze_map = {(1,1): {'E': 0, 'W': 0, 'N': 0, 'S': 0}, (1,2): {'E': 0, 'W': 0, 'N'
             (6,1): {'E': 0, 'W': 0, 'N': 0, 'S': 0}, (6,2): {'E': 0, 'W': 0, 'N': 0, 'S': 0}, (6,3): {'E': 0, 'W': 0, 'N': 1, 'S': 0}, (6,4): {'E': 0, 'W': 0, 'N': 0, 'S': 0}, (6,5): {'E': 0, 'W': 0, 'N': 0, 'S': 0}, (6,6): {'E': 0, 'W': 0, 'N': 0, 'S': 0}}
 
 def go_straight(bot):
-    bot.drive_direct(30, 30)
+    bot.drive_direct(100, 100)
     time.sleep(1.0)
-    bot.drive_stop()
 
 def turn_right(bot):
-    bot.drive_direct(30, -30)
+    bot.drive_direct(183, -183)
     time.sleep(1.0)
-    bot.drive_stop()
 
 def turn_left(bot):
-    bot.drive_direct(-30, 30)
+    bot.drive_direct(-183, 183)
     time.sleep(1.0)
-    bot.drive_stop()
 
 if __name__ == "__main__":
     port = '/dev/tty.usbserial-DN026A6A'
@@ -90,3 +87,17 @@ if __name__ == "__main__":
                 pass
             go_straight(bot)
             current_direction = 'W'
+
+    # instantiate song
+    song = [72, 12, 20, 24, 67, 12, 20, 24, 64, 24, 69, 16, 71, 16, 69, 16, 68, 24, 70, 24, 68, 24, 67, 12, 65, 12, 67,
+            48]
+    song_num = 3
+    bot.createSong(song_num, song)
+
+    time.sleep(0.1)
+
+    how_long = bot.playSong(song_num)
+
+    bot.drive_stop()
+
+    time.sleep(how_long)
