@@ -19,13 +19,15 @@ m.CreateMaze(theme=COLOR.light, saveMaze=True, loopPercent=100)
 position_walls = m.maze_map
 
 a = agent(m, footprints=True)
-plan = planner(position_walls, r, c)
+plan = planner(position_walls, r, c, 1, 1)
 path = plan_to_path(plan)
 
 a2 = agent(m, x=r, y=1, footprints=True, shape='arrow')
-plan2 = planner(position_walls, r, 1)
+plan2 = planner(position_walls, r, 1, 1, 1)
 path2 = plan_to_path(plan2)
 
 m.tracePath({a:path})
 m.tracePath({a2:path2})
 m.run()
+
+print(m.maze_map)

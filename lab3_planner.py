@@ -2,7 +2,7 @@
 # Libraries
 import pyhop
 
-def planner(position_walls, r, c):
+def planner(position_walls, r, c, gr, gc):
     # -------------------------------------------
     # Set start state
     start = pyhop.State('start')
@@ -12,7 +12,7 @@ def planner(position_walls, r, c):
     start.W_wall = position_walls[start.position]['W']
     start.N_wall = position_walls[start.position]['N']
     start.S_wall = position_walls[start.position]['S']
-    start.goal = (1, 1)
+    start.goal = (gr, gc)
     start.visited = []
     start.visited.append(start.position)
     start.exit = False
